@@ -1,7 +1,7 @@
 
 export function getDeckInfo (deck) {
-    const info = {
-        React : {
+    const info = [
+        {
             title: 'React',
             questions: [
                 {
@@ -14,7 +14,7 @@ export function getDeckInfo (deck) {
                 }
             ]
         },
-        Javascript : {
+        {
             title: 'Javascript',
             questions: [
                 {
@@ -27,5 +27,8 @@ export function getDeckInfo (deck) {
                 }
             ]
         },
-    }
+    ]
+    return typeof deck === 'undefined'
+        ? info
+        : info[deck]
 }
