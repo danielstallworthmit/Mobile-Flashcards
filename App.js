@@ -3,14 +3,15 @@ import { StyleSheet, Text, View, StatusBar, Dimensions } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 import DeckList from './src/components/DeckList'
+import Router from './Router'
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <DeckList />
+        <Router />
       </View>
-    );
+    )
   }
 }
 
@@ -20,4 +21,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop:Constants.statusBarHeight
   }
-});
+})

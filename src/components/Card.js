@@ -1,3 +1,4 @@
+// Modified from Grider React Native Udemy course 
 import React from 'react';
 import { View, Text } from 'react-native';
 

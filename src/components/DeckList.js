@@ -1,14 +1,17 @@
 import React from 'react'
-import { Text, View, ListView, FlatList } from 'react-native'
+import { Text, View, ListView, FlatList, TouchableOpacity } from 'react-native'
 import { getDeckInfo } from '../../utils/helpers'
+import { Actions } from 'react-native-router-flux'
 import Card from './Card'
 
 function DeckItem({title, questions}) {
     return (
-        <Card style={{flex:1}}>
+        <TouchableOpacity onPress={Actions.DeckView}>
+            <Card style={{flex:1}}>
                 <Text style={{fontSize: 25}}>{title}</Text>
                 <Text>{`${questions.length} cards`}</Text>
-        </Card>
+            </Card>
+        </TouchableOpacity>
     )
 }
 
