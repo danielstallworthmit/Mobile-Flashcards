@@ -1,4 +1,7 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './src/reducers'
 import { StyleSheet, Text, View, StatusBar, Dimensions } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
@@ -8,9 +11,11 @@ import Router from './Router'
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Router />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <Router />
+        </View>
+      </Provider>
     )
   }
 }
