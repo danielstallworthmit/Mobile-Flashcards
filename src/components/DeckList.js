@@ -2,12 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Text, View, ListView, FlatList, TouchableOpacity } from 'react-native'
 import { getDeckInfo } from '../../utils/helpers'
+import { quizView } from '../actions'
 import { Actions } from 'react-native-router-flux'
 import Card from './Card'
 
-function DeckItem({title, questions}) {
+function DeckItem({title, questions, quizView}) {
     return (
-        <TouchableOpacity onPress={() => Actions.DeckView({ title, questions })}>
+        <TouchableOpacity onPress={() => quizView({
+                navType: 'DeckStart',
+                headline: title,
+                title, questions,
+                subline: `${questions.length} Cards`,
+                topButton: 'Add Card',
+                bottomButton: 'Start Quiz'
+             })}>
             <Card style={{flex:1}}>
                 <Text style={{fontSize: 25}}>{title}</Text>
                 <Text>{`${questions.length} cards`}</Text>
@@ -18,7 +26,7 @@ function DeckItem({title, questions}) {
 
 class DeckList extends React.Component {
     renderItem = ({item}) => {
-        return <DeckItem key={item.title} {...item} /> 
+        return <DeckItem {...item} quizView={this.props.quizView} /> 
     }
     render() {
         return (
@@ -33,4 +41,4 @@ const mapStateToProps = ({ decks }) => {
     return { decks }
 }
 
-export default connect(mapStateToProps)(DeckList)
+export default connect(mapStateToProps, { quizView })(DeckList)
