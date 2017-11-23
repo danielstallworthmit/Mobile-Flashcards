@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Text, View, ListView, FlatList, TouchableOpacity } from 'react-native'
+import { Text, View, ListView, FlatList, TouchableOpacity, LayoutAnimation } from 'react-native'
 import { getDeckInfo } from '../../utils/helpers'
 import { quizView, getDecks } from '../actions'
 import { Actions } from 'react-native-router-flux'
@@ -26,6 +26,7 @@ class DeckList extends React.Component {
         const decks = this.props.decks.allDecks ? this.props.decks.allDecks : getDeckInfo()
         // console.log(decks)
         this.props.getDecks(decks)
+        LayoutAnimation.spring()
     }
     renderItem = ({item}) => {
         return <DeckItem {...item} quizView={this.props.quizView} /> 

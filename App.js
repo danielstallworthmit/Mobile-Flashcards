@@ -17,6 +17,7 @@ export default class App extends React.Component {
     store: store
   }
   componentWillMount() {
+    // Adapted from https://medium.com/@sumitkushwaha/syncing-redux-store-with-asyncstorage-in-react-native-2b8b890b9ca1 
     let self = this
     AppState.addEventListener('change', this.handleAppStateChange.bind(this))
     this.setState({ storeLoading: true })
