@@ -7,17 +7,17 @@ import Button from './Button'
 
 class DeckView extends React.Component {
     sublineFunc() {
-        const { title, questions, q, subline } = this.props
+        const { title, questions, q, subline, score } = this.props
         if (this.props.navType === 'question') {
             if (subline === 'Question') {
                 return (
-                    <TouchableOpacity style={styles.textView} onPress={() => this.props.quizView({ ques: 1, title, questions, q })}>
+                    <TouchableOpacity style={styles.textView} onPress={() => this.props.quizView({ ques: 1, title, questions, q, score })}>
                         <Text style={{fontSize: 20, color: 'blue'}}>{this.props.subline}</Text>
                     </TouchableOpacity>
                 )
             } else {
                 return (
-                    <TouchableOpacity style={styles.textView} onPress={() => this.props.quizView({ ans: 1, title, questions, q })}>
+                    <TouchableOpacity style={styles.textView} onPress={() => this.props.quizView({ ans: 1, title, questions, q, score })}>
                         <Text style={{fontSize: 20, color: 'blue'}}>{this.props.subline}</Text>
                     </TouchableOpacity>
                 )
@@ -30,16 +30,23 @@ class DeckView extends React.Component {
         )
     }
     topButtonFunc(){
-        const { title, questions, q } = this.props
-        if (this.props.topButton === 'Add Card') {
+        const { title, questions, q, topButton, quizView, score } = this.props
+        if (topButton === 'Add Card') {
             Actions.NewCard()
+        } 
+        else if (topButton === 'Restart Quiz') {
+            quizView({ navType: 'QuizStart', title, questions })
         } else {
-            this.props.quizView({ title, questions, q })
+            quizView({ title, questions, q, score: score + 1 })
         }
     }
     bottomButtonFunc(){
-        const { title, questions, q, navType } = this.props
-        this.props.quizView({ title, questions, q, navType })
+        const { title, questions, q, navType, quizView, score, bottomButton } = this.props
+        if (bottomButton === 'Back to Deck') {
+            quizView({ navType: 'DeckStart', title, questions })
+        } else {
+            quizView({ title, questions, q, navType, score })
+        }
     }
     render() {
         const { navType, questions, headline, subline, topButton, bottomButton, q } = this.props

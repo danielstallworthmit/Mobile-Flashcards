@@ -17,7 +17,7 @@ export const deckCreate = (deck) => {
     }
 }
 
-export const quizView = ({ title, questions, q=null, navType='question', ans=null, ques=null }) => {
+export const quizView = ({ title, questions, q=null, navType='question', ans=null, ques=null, score=null }) => {
     console.log(navType)
     if (navType === 'DeckStart') {
         navType = 'QuizStart'
@@ -30,6 +30,7 @@ export const quizView = ({ title, questions, q=null, navType='question', ans=nul
     else if (navType === 'QuizStart') {
         navType = 'question'
         q = 0
+        score = 0
         headline= questions[q].question
         subline= 'Answer'
         topButton= 'Correct'
@@ -49,13 +50,21 @@ export const quizView = ({ title, questions, q=null, navType='question', ans=nul
     }
     else {
         q += 1
-        headline= questions[q].question
-        subline= 'Answer'
-        console.log('Default triggered!')
+        if (q >= questions.length) {
+            navType = 'Done'
+            headline = `Score: ${score}`
+            subline = ''
+            topButton= 'Restart Quiz'
+            bottomButton= 'Back to Deck'
+        } else {
+            headline= questions[q].question
+            subline= 'Answer'
+            console.log('Default triggered!')
+        }
     }
 
     return (dispatch) => {
-        dispatch({ type: QUIZ_VIEW, payload: { navType, title, questions, headline, subline, topButton, bottomButton, q, ans, ques } })
+        dispatch({ type: QUIZ_VIEW, payload: { navType, title, questions, headline, subline, topButton, bottomButton, q, ans, ques, score } })
         Actions.DeckView()
         console.log('Should have navigated!!')
     }
