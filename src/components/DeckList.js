@@ -23,7 +23,9 @@ function DeckItem({title, questions, quizView}) {
 class DeckList extends React.Component {
     componentDidMount() {
         console.log('get decks called')
-        this.props.getDecks()
+        const decks = this.props.decks.allDecks ? this.props.decks.allDecks : getDeckInfo()
+        console.log(decks)
+        this.props.getDecks(decks)
     }
     renderItem = ({item}) => {
         return <DeckItem {...item} quizView={this.props.quizView} /> 
