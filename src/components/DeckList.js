@@ -24,7 +24,7 @@ class DeckList extends React.Component {
     componentDidMount() {
         console.log('get decks called')
         const decks = this.props.decks.allDecks ? this.props.decks.allDecks : getDeckInfo()
-        console.log(decks)
+        // console.log(decks)
         this.props.getDecks(decks)
     }
     renderItem = ({item}) => {

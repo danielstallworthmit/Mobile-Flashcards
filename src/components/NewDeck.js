@@ -13,7 +13,7 @@ class NewDeck extends React.Component {
         return (
             <View style={styles.newDeckForm}>
                 <View>
-                    <Text style={{fontSize: 18}}>{'Enter the name for your new deck:'}</Text>
+                    <Text style={{fontSize: 35}}>{'Enter the name for your new deck:'}</Text>
                 </View>
                 <Input 
                     label = 'Deck Name'
@@ -35,8 +35,8 @@ const styles = {
     newDeckForm: {
         flex: 1,
         justifyContent: 'space-around',
-        paddingLeft: 5,
-        paddingRight: 5
+        paddingLeft: 8,
+        paddingRight: 8
     },
     submitButton: {
         height: 70

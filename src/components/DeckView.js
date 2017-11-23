@@ -6,6 +6,9 @@ import { quizView } from '../actions'
 import Button from './Button'
 
 class DeckView extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.headline !== this.props.headline
+    }
     sublineFunc() {
         const { title, questions, q, subline, score } = this.props
         if (this.props.navType === 'question') {
@@ -50,7 +53,7 @@ class DeckView extends React.Component {
     }
     render() {
         const { navType, questions, headline, subline, topButton, bottomButton, q } = this.props
-        console.log(q)
+        console.log(this.props)
         return (
             <View style={styles.deckView}>
                 { navType === 'question' && <Text>{`${q+1}/${questions.length}`}</Text> }

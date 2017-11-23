@@ -3,6 +3,7 @@ import { Actions } from 'react-native-router-flux'
 export const GET_DECKS = 'GET_DECKS'
 export const QUIZ_VIEW = 'QUIZ_VIEW'
 export const ADD_DECK = 'ADD_DECK'
+export const ADD_CARD = 'ADD_CARD'
 
 export const getDecks = (decks) => {
     return {
@@ -15,14 +16,15 @@ export const addDeck = ({title}) => {
     return (dispatch) => {
         console.log('Add deck called')
         dispatch({ type: ADD_DECK, payload: title })
-        Actions.DeckView({ title, 
-                navType: 'DeckStart', 
-                questions: [], 
-                headline: title, 
-                subline: '0 Cards',
-                topButton: 'Add Card',
-                bottomButton: 'Start Quiz'
-            })
+        Actions.DeckView()
+    }
+}
+
+export const addCard = ({ headline, question, answer }) => {
+    return (dispatch) => {
+        dispatch({ type: ADD_CARD, payload: { headline, question, answer } })
+        Actions.DeckList()
+        // Actions.DeckView({ navType: 'DeckStart' })
     }
 }
 
