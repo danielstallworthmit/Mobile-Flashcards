@@ -19,8 +19,10 @@ export default (state=INITIAL_STATE, action) => {
                     bottomButton: 'Start Quiz',
                     allDecks: [ ...state.allDecks, { title: action.payload, questions: [] } ] }
         case ADD_CARD:
-            // return { ...state, allDecks: [ ...state.allDecks.slice(0, action.payload.idx), { ...state.allDecks[action.payload.idx], questions: [ ...state.allDecks[action.payload.idx].questions, { question: action.payload.question, answer: action.payload.answer }   ] }, ...state.allDecks.slice(action.payload.idx) ] }
-            return { ...state, allDecks: state.allDecks.map((deck, i) => {
+            return { ...state, 
+                questions: [ ...state.questions, { question: action.payload.question, answer: action.payload.answer } ],
+                subline: `${state.questions.length+1} Cards`,
+                allDecks: state.allDecks.map((deck, i) => {
                 if (deck.title === action.payload.headline) {
                     return { ...deck, questions: [ ...deck.questions, { question: action.payload.question, answer: action.payload.answer } ] }
                 }

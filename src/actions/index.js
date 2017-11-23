@@ -23,8 +23,8 @@ export const addDeck = ({title}) => {
 export const addCard = ({ headline, question, answer }) => {
     return (dispatch) => {
         dispatch({ type: ADD_CARD, payload: { headline, question, answer } })
-        Actions.DeckList()
-        // Actions.DeckView({ navType: 'DeckStart' })
+        // Actions.DeckList()
+        Actions.DeckView()
     }
 }
 
