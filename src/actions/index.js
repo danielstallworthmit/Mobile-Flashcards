@@ -4,6 +4,12 @@ export const GET_DECKS = 'GET_DECKS'
 export const DECK_CREATE = 'DECK_CREATE'
 export const QUIZ_VIEW = 'QUIZ_VIEW'
 
+export const getDecks = () => {
+    return {
+        type: GET_DECKS
+    }
+}
+
 export const deckCreate = (deck) => {
     return {
         type: DECK_CREATE,
@@ -11,30 +17,35 @@ export const deckCreate = (deck) => {
     }
 }
 
-export const quizView = ({ title, questions, q, navType='question', ans=null, ques=null }) => {
-    console.log(ans)
-    console.log(questions)
+export const quizView = ({ title, questions, q=null, navType='question', ans=null, ques=null }) => {
+    console.log(navType)
     if (navType === 'DeckStart') {
+        navType = 'QuizStart'
+        headline= title
+        subline= `${questions.length} Cards`
+        topButton= 'Add Card'
+        bottomButton= 'Start Quiz'
+        console.log('DeckStart triggered!')
+    }
+    else if (navType === 'QuizStart') {
         navType = 'question'
         q = 0
         headline= questions[q].question
         subline= 'Answer'
         topButton= 'Correct'
         bottomButton= 'Incorrect'
-        console.log('DeckStart triggered!')
+        console.log('QuizStart triggered!')
     }
     else if (ans !== null) {
         ans=null
         ques=1
         headline= questions[q].answer
         subline= 'Question'
-        console.log('ans triggered!')
     }
     else if (ques !== null) {
         ques=null
         headline= questions[q].question
         subline= 'Answer'
-        console.log('ques should have triggered!')
     }
     else {
         q += 1
