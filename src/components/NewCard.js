@@ -55,14 +55,6 @@ const styles = {
 }
 
 const mapStateToProps = ({ decks }) => {
-    // let idx = null
-    // decks.allDecks.map((deck, i) => {
-    //     if (deck.title === decks.headline) {
-    //         idx = i
-    //     }
-    //     return deck
-    // })
-    // return { idx }
     return { headline: decks.headline }
 }
 

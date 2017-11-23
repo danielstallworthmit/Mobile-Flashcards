@@ -6,12 +6,10 @@ import { quizView } from '../actions'
 import Button from './Button'
 
 class DeckView extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return nextProps.headline !== this.props.headline
-    }
     sublineFunc() {
         const { title, questions, q, subline, score } = this.props
         if (this.props.navType === 'question') {
+            // Show touchable subline if in quiz mode able to switch back and forth from Question to Answer
             if (subline === 'Question') {
                 return (
                     <TouchableOpacity style={styles.textView} onPress={() => this.props.quizView({ ques: 1, title, questions, q, score })}>
@@ -40,6 +38,7 @@ class DeckView extends React.Component {
         else if (topButton === 'Restart Quiz') {
             quizView({ navType: 'QuizStart', title, questions })
         } else {
+            // Not add or restart, so it is the Correct button, so add 1 to the score
             quizView({ title, questions, q, score: score + 1 })
         }
     }
@@ -48,12 +47,12 @@ class DeckView extends React.Component {
         if (bottomButton === 'Back to Deck') {
             quizView({ navType: 'DeckStart', title, questions })
         } else {
+            // Not back button, so it is the Incorrect button, just continue with quiz
             quizView({ title, questions, q, navType, score })
         }
     }
     render() {
         const { navType, questions, headline, subline, topButton, bottomButton, q } = this.props
-        console.log(this.props)
         return (
             <View style={styles.deckView}>
                 { navType === 'question' && <Text>{`${q+1}/${questions.length}`}</Text> }

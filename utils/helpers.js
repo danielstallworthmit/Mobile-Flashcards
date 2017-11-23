@@ -71,6 +71,7 @@ export function setLocalNotification() {
                             tomorrow.setDate(tomorrow.getDate() + 1)
                             tomorrow.setHours(20)
                             tomorrow.setMinutes(0)
+                            // 8pm notification set for next day to go off if they do not complete a quiz
 
                             Notifications.scheduleLocalNotificationAsync(
                                 createNotification(),

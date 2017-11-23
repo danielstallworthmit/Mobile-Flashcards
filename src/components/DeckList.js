@@ -22,10 +22,10 @@ function DeckItem({title, questions, quizView}) {
 
 class DeckList extends React.Component {
     componentDidMount() {
-        console.log('get decks called')
+        // If there are decks to get, get them, if not use the default
         const decks = this.props.decks.allDecks ? this.props.decks.allDecks : getDeckInfo()
-        // console.log(decks)
         this.props.getDecks(decks)
+        // Animate on mount
         LayoutAnimation.spring()
     }
     renderItem = ({item}) => {

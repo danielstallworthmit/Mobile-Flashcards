@@ -6,7 +6,6 @@ import DeckView from './src/components/DeckView'
 import NewDeck from './src/components/NewDeck'
 import BackButton from './src/components/BackButton'
 import NewCard from './src/components/NewCard'
-import QuizViewAnswer from './src/components/QuizViewAnswer'
 
 const RouterComponent = () => {
     return (
@@ -17,7 +16,6 @@ const RouterComponent = () => {
                 <Scene key="DeckView" component={DeckView} title="Deck" renderBackButton={BackButton} />
                 <Scene key="NewDeck" component={NewDeck} title="New Deck" />
                 <Scene key="NewCard" component={NewCard} title="New Card" />
-                <Scene key="QuizViewAnswer" component={QuizViewAnswer} title="Quiz Answer" />
             </Scene>
         </Router>
     )

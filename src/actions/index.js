@@ -6,6 +6,7 @@ export const QUIZ_VIEW = 'QUIZ_VIEW'
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
 
+// Load all decks
 export const getDecks = (decks) => {
     return {
         type: GET_DECKS,
@@ -13,6 +14,7 @@ export const getDecks = (decks) => {
     }
 }
 
+// Add a deck
 export const addDeck = ({title}) => {
     return (dispatch) => {
         console.log('Add deck called')
@@ -21,25 +23,26 @@ export const addDeck = ({title}) => {
     }
 }
 
+// Add a card to a deck
 export const addCard = ({ headline, question, answer }) => {
     return (dispatch) => {
         dispatch({ type: ADD_CARD, payload: { headline, question, answer } })
-        // Actions.DeckList()
         Actions.DeckView()
     }
 }
 
+// Quiz logic to go through a quiz for a deck
 export const quizView = ({ title, questions, q=null, navType='question', ans=null, ques=null, score=null }) => {
-    console.log(navType)
     if (navType === 'DeckStart') {
+        // DeckStart page, Should ask if they want to start the quiz
         navType = 'QuizStart'
         headline = title
         subline = `${questions.length} Cards`
         topButton = 'Add Card'
         bottomButton = 'Start Quiz'
-        console.log('DeckStart triggered!')
     }
     else if (navType === 'QuizStart') {
+        // They start the quiz, if there are no questions handle messages accordingly
         navType = 'question'
         q = 0
         score = 0
@@ -55,15 +58,16 @@ export const quizView = ({ title, questions, q=null, navType='question', ans=nul
             topButton = 'Add Card'
             bottomButton = 'Back to Deck'
         }
-        console.log('QuizStart triggered!')
     }
     else if (ans !== null) {
+        // User has clicked on the answer field and the answer is shown
         ans = null
         ques = 1
         headline = questions[q].answer
         subline = 'Question'
     }
     else if (ques !== null) {
+        // User clicks on the Question field to go from Answer back to Question (do not go to next question)
         ques = null
         headline = questions[q].question
         subline = 'Answer'
@@ -71,23 +75,25 @@ export const quizView = ({ title, questions, q=null, navType='question', ans=nul
     else {
         q += 1
         if (q >= questions.length) {
+            // Finished with the quiz! Score is shown and asked to restart or go back
             navType = 'Done'
             headline = `Score: ${score}`
             subline = ''
             topButton = 'Restart Quiz'
             bottomButton = 'Back to Deck'
+            // Once quiz is completed for the data notification reset
             clearLocalNotification()
                 .then(setLocalNotification)
         } else {
+            // Otherwise user is still going through the quiz
             headline = questions[q].question
             subline = 'Answer'
-            console.log('Default triggered!')
         }
     }
 
     return (dispatch) => {
+        // Update redux store and navigate to the quiz page
         dispatch({ type: QUIZ_VIEW, payload: { navType, title, questions, headline, subline, topButton, bottomButton, q, ans, ques, score } })
         Actions.DeckView()
-        console.log('Should have navigated!!')
     }
 }
