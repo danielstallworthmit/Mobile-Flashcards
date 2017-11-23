@@ -1,4 +1,5 @@
 import { Actions } from 'react-native-router-flux'
+import { clearLocalNotification, setLocalNotification } from '../../utils/helpers'
 
 export const GET_DECKS = 'GET_DECKS'
 export const QUIZ_VIEW = 'QUIZ_VIEW'
@@ -75,6 +76,8 @@ export const quizView = ({ title, questions, q=null, navType='question', ans=nul
             subline = ''
             topButton = 'Restart Quiz'
             bottomButton = 'Back to Deck'
+            clearLocalNotification()
+                .then(setLocalNotification)
         } else {
             headline = questions[q].question
             subline = 'Answer'

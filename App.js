@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, AppState, AsyncStorage } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 import ReduxThunk from 'redux-thunk'
+import { setLocalNotification } from './utils/helpers'
 import DeckList from './src/components/DeckList'
 import Router from './Router'
 
@@ -15,6 +16,9 @@ export default class App extends React.Component {
   state = {
     storeLoading: false,
     store: store
+  }
+  componentDidMount() {
+    setLocalNotification()
   }
   componentWillMount() {
     // Adapted from https://medium.com/@sumitkushwaha/syncing-redux-store-with-asyncstorage-in-react-native-2b8b890b9ca1 
