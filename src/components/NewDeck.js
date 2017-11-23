@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
 import Input from './Input'
@@ -11,7 +11,7 @@ class NewDeck extends React.Component {
     }
     render() {
         return (
-            <View style={styles.newDeckForm}>
+            <KeyboardAvoidingView behavior='padding' style={styles.newDeckForm}>
                 <View>
                     <Text style={{fontSize: 35}}>{'Enter the name for your new deck:'}</Text>
                 </View>
@@ -26,7 +26,7 @@ class NewDeck extends React.Component {
                         {'Create Deck'}
                     </Button>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

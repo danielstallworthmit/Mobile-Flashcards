@@ -20,3 +20,5 @@ Download Expo and scan the QR code to run the app on your mobile device.
 
 You can also press 'i' to run an ios simulator or 'a' to run an android simulator.<br>
 To see any console logs shake the mobile device and choose 'Debug Remote JS' in Expo, which opens a debug tab on your browser.
+
+Mobile Flashcards was tested on ios.

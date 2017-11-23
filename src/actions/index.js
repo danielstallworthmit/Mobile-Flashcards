@@ -24,9 +24,9 @@ export const addDeck = ({title}) => {
 }
 
 // Add a card to a deck
-export const addCard = ({ headline, question, answer }) => {
+export const addCard = ({ title, question, answer }) => {
     return (dispatch) => {
-        dispatch({ type: ADD_CARD, payload: { headline, question, answer } })
+        dispatch({ type: ADD_CARD, payload: { title, question, answer } })
         Actions.DeckView()
     }
 }

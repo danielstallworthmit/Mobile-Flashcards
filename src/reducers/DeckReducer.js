@@ -11,8 +11,10 @@ export default (state=INITIAL_STATE, action) => {
         case ADD_DECK:
             // Update elements to show correct info on navigation when create new deck
             return { ...state, 
+                    title: action.payload,
+                    navType: 'QuizStart',
                     headline: action.payload, 
-                    q: null, 
+                    q: null, score: null,
                     questions: [],
                     subline: '0 Cards',
                     topButton: 'Add Card',
@@ -26,7 +28,7 @@ export default (state=INITIAL_STATE, action) => {
                 subline: `${state.questions.length+1} Cards`,
                 allDecks: state.allDecks.map((deck, i) => {
                     // Update matching deck in the allDecks list with the new card
-                    if (deck.title === action.payload.headline) {
+                    if (deck.title === action.payload.title) {
                         return { ...deck, 
                             questions: [ 
                                 ...deck.questions, 

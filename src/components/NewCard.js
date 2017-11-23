@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
 import Input from './Input'
@@ -12,7 +12,7 @@ class NewCard extends React.Component {
     }
     render() {
         return (
-            <View style={styles.newCardForm}>
+            <KeyboardAvoidingView behavior='padding' style={styles.newCardForm}>
                 <View>
                     <Text style={{fontSize: 35}}>{'Enter a Question and Answer:'}</Text>
                 </View>
@@ -30,14 +30,14 @@ class NewCard extends React.Component {
                 />
                 <View style={styles.submitButton}>
                     <Button onPress={() => this.props.addCard({ 
-                                        headline: this.props.headline, 
+                                        title: this.props.title, 
                                         question: this.state.newCard, 
                                         answer: this.state.newAnswer 
                                     }) } >
                         {'Create Card'}
                     </Button>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -55,7 +55,7 @@ const styles = {
 }
 
 const mapStateToProps = ({ decks }) => {
-    return { headline: decks.headline }
+    return { title: decks.title }
 }
 
 export default connect(mapStateToProps, { addCard })(NewCard)
